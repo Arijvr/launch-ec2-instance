@@ -4,6 +4,15 @@ provider "aws" {
   profile   = "terraform_user"
 }
 
+# store the terraform state file in s3
+terraform {
+  backend "s3" {
+    bucket  = "aricloud-terraform-state-bucket"
+    key     = "terraform.tfstate"
+    region  = "us-east-1"
+    profile = "terraform_user"
+  }
+}
 
 # create default vpc if one does not exit
 resource "aws_default_vpc" "default_vpc" {
